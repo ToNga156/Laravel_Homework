@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\CreateTableController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 
 Route::get('/', function () {
-    return view('form');
+    return view('home');
 });
-Route::post('/', [SignUpController::class, 'signUp']);
