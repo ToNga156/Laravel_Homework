@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{{asset('css/form.css')}}">
 </head>
 <body>
+    <form action="/clear" method="post">
+        @csrf
+        <button type="submit" class="btn btn-danger" style="left: 200px;">Clear cache</button>
+    </form>
     <form action="/" method="post" class="my-form">
         @csrf
         <div class="form-group">
@@ -38,15 +42,19 @@
         <button type="submit" class="btn btn-primary" style="left: 200px;">OK</button>
         <div>@include('block.error')</div>
         <div class="display-infor">
-            @if(isset($user)) 
-                <p>Name: {{$user['name']}}</p>
-                <p>Age: {{$user["age"]}}</p>
-                <p>Date: {{$user["date"]}}</p>
-                <p>Phone: {{$user["phone"]}}</p>
-                <p>Web: {{$user["web"]}}</p>
-                <p>Address: {{$user["address"]}}</p>
+            @if(isset($userSession))
+               @foreach($userSession as $user)
+                    <p>Name: {{$user['name']}}</p>
+                    <p>Age: {{$user["age"]}}</p>
+                    <p>Date: {{$user["date"]}}</p>
+                    <p>Phone: {{$user["phone"]}}</p>
+                    <p>Web: {{$user["web"]}}</p>
+                    <p>Address: {{$user["address"]}}</p>
+                   <hr>
+               @endforeach
             @endif
         </div>
     </form>
+
 </body>
 </html>

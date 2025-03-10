@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\SignUpRequest;
 
 class SignUpController extends Controller
 {
     public function signUp(SignUpRequest $request)
     {
+        // Retrieve existing session data or initialize an empty array
+        $userSession = session('userSession', []);
         $user = [
             'name' => $request->input('name'),
             'age' => $request->input('age'),
@@ -16,7 +20,13 @@ class SignUpController extends Controller
             'web' => $request->input('web'),
             'address' => $request->input('address')
         ];
-//        var_dump($user);
-        return view('form')->with('user', $user);
+        $userSession[] = $user;
+        session(['userSession' => $userSession]);
+        return view('form')->with('userSession', $userSession);
+    }
+
+    public function clear() {
+        Session::forget('userSession');
+        return redirect('/');
     }
 }
