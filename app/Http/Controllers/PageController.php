@@ -5,24 +5,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Slide;
 use App\Models\Product;
+use App\Models\ProductType;
 
-class PageController 
-{
+class PageController {
     public function getIndex()
     {
         $slide = Slide::all();
-        $products = Product::where('id_type', 4)
-                   ->where('id', '>=', 34)
-                   ->limit(4)
-                   ->get();
-        $topProducts1 = Product::where('id_type', 1)
-                   ->limit(4)
-                   ->get();
-        $topProducts2 = Product::where('id_type', 7)
-                   ->limit(4)
-                   ->get();
+        $new_product = Product::where('new', 1)->paginate(4);
+        $promotion_product = Product::where('promotion_price', '<>', 0)->paginate(8);
 
-
-        return view('page.trangchu', compact('slide', 'products', 'topProducts1', 'topProducts2'));
+        return view('page.trangchu', compact('slide', 'new_product', 'promotion_product'));
     }
+
+    public function addToCart() {
+
+    }
+
+    public function getLoaiSp($type){
+        $sp_theoloai = Product::where('id_type', $type)->get();
+        $type_product = ProductType::all();
+        $sp_khac = Product::where('id_type', '<>', $type)->paginate(3);
+
+        return view('page.loai_sanpham', compact('sp_theoloai', 'type_product', 'sp_khac'));
+        }
 }

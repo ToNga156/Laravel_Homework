@@ -1,4 +1,4 @@
-<div class="rev-slider">
+{{-- <div class="rev-slider">
     <div class="fullwidthbanner-container">
         <div class="fullwidthbanner">
             <div class="bannercontainer" >
@@ -41,4 +41,4 @@
         </div>
     </div>
     <!--slider-->
-</div>
+</div> --}}
