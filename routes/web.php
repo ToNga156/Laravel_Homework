@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\CreateTableController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/trangchu', [PageController::class, 'getIndex']);
