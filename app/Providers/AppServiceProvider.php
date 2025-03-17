@@ -2,28 +2,31 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Models\ProductType;
-use App\Models\Product;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         //
     }
 
     /**
      * Bootstrap any application services.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
-        view()->composer('component.header', function ($view) {
-            $loai_sp = ProductType::all();
-            $view->with('loai_sp', $loai_sp);
-        });
+        view()->composer('page.header', function ($view) {				
+            $loai_sp = ProductType::all();				
+            $view->with('loai_sp', $loai_sp);				
+        });				
     }
 }
