@@ -26,7 +26,7 @@
 								<div class="col-sm-4 d-flex align-items-stretch row-gap-4 "> <!-- Căn đều chiều cao -->
 									<div class="single-item d-flex flex-column">
 										<div class="single-item-header">
-											<a href="product.html">
+											<a href="{{ route('chitietsanpham', ['id' => $product->id]) }}">
 												<img src="/source/image/product/{{ $product->image }}" alt="" class="img-fluid">
 											</a>
 										</div>

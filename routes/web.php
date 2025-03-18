@@ -11,7 +11,7 @@ Route::group(['prefix' => 'page'], function(){
     Route::get('/product', [ProductController::class, 'getAllProduct']);
     Route::get('/about', [PageController::class, 'getAbout']);
     Route::get('/contact', [PageController::class, 'getContact']);
-    Route::get('/detail/{id}', [PageController::class, 'getDetail']);
+    Route::get('/detail/{id}', [PageController::class, 'getDetail'])->name('chitietsanpham');
     Route::get('/product/type/{id}', [ProductController::class, 'showProduct']);
 });
 

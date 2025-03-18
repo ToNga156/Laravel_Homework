@@ -64,13 +64,13 @@ class PageController extends Controller
         $product->new = $request->inputNew;
         $product->id_type = $request->inputType;
         $product->save();
-        return $this->getIndexAdmin();
+        return redirect()->to(session()->get('url.intended', url('/admin')));
     }
     public function postAdminDelete($id)
     {
         $product = Product::find($id);
         $product->delete();
-        return $this->getIndexAdmin();
+        return redirect()->back();
     }
     public function getAdminEdit($id)
     {
@@ -102,7 +102,7 @@ class PageController extends Controller
     $product->id_type = $request->editType; 
     $product->save(); 
     
-    return $this->getIndexAdmin(); 
+    return redirect()->to(session()->get('url.intended', url('/admin')));
 }
 
     public function getAbout(){
