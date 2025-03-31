@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
+use App\Http\Controllers\UserController;
 
 Route::group(['prefix' => 'page'], function(){
     Route::get('/trangchu', [PageController::class, 'getIndex']);
@@ -13,7 +14,19 @@ Route::group(['prefix' => 'page'], function(){
     Route::get('/contact', [PageController::class, 'getContact']);
     Route::get('/detail/{id}', [PageController::class, 'getDetail'])->name('chitietsanpham');
     Route::get('/product/type/{id}', [ProductController::class, 'showProduct']);
+    Route::get('/search', [PageController::class, 'search'])->name('search');
+
+    // Route::get('/register', [PageController::class, 'showRegisterForm'])->name('register');
+    // Route::post('/register', [PageController::class, 'register'])->name('register');
+    // Route::get('/login', [PageController::class, 'showLoginForm'])->name('login');
+    // Route::post('/login', [PageController::class, 'login']);
+
 });
+
+Route::get('/register', function () { return view('users.register');});    
+Route::post('/register', [UserController::class, 'Register']);
+Route::get('/login', function () { return view('users.login');});
+Route::post('/login', [UserController::class, 'Login']);
 
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/', [PageController::class, 'getIndexAdmin']);

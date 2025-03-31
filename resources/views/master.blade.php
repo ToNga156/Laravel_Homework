@@ -17,11 +17,11 @@
 </head>
 <body>
 
-@include('component.header') <!-- #header -->
-@include('component.slider')
+@include('page.header') <!-- #header -->
+{{-- @include('page.slider') --}}
 @yield('content')
-@include("component.footer")
-@include("component.copyright")
+@include("page.footer")
+{{-- @include("page.copyright") --}}
 
 
 <!-- include js files -->

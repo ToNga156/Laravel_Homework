@@ -17,14 +17,12 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-
-
-    // public function getAllProduct(){
-    //     $newproducts = Product::where('new', 1)->paginate(4);
-    //     $topproducts = Product::where('new', 0)->paginate(4);
-    //     $productType = ProductType::all();
-    //     return view('page.productType', compact('newproducts', 'topproducts', 'productType'));
-    // }
+    public function getAllProduct(){
+        $newproducts = Product::where('new', 1)->paginate(4);
+        $topproducts = Product::where('new', 0)->paginate(4);
+        $productType = ProductType::all();
+        return view('page.productType', compact('newproducts', 'topproducts', 'productType'));
+    }
 
     public function showProduct($id){
         $products = Product::where('id_type', $id)->get();
