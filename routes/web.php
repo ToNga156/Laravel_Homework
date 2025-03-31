@@ -16,17 +16,17 @@ Route::group(['prefix' => 'page'], function(){
     Route::get('/product/type/{id}', [ProductController::class, 'showProduct']);
     Route::get('/search', [PageController::class, 'search'])->name('search');
 
-    // Route::get('/register', [PageController::class, 'showRegisterForm'])->name('register');
-    // Route::post('/register', [PageController::class, 'register'])->name('register');
-    // Route::get('/login', [PageController::class, 'showLoginForm'])->name('login');
-    // Route::post('/login', [PageController::class, 'login']);
+    Route::get('/login', [PageController::class, 'getLogin'])->name('login');
+    Route::get('/signup', [PageController::class, 'getSignup']);
+    Route::post('/postLogin', [PageController::class, 'postLogin']);
+    Route::post('/postSignup', [PageController::class, 'postSignup']);
 
 });
 
-Route::get('/register', function () { return view('users.register');});    
-Route::post('/register', [UserController::class, 'Register']);
-Route::get('/login', function () { return view('users.login');});
-Route::post('/login', [UserController::class, 'Login']);
+// Route::get('/register', function () { return view('users.register');});    
+// Route::post('/register', [UserController::class, 'Register']);
+// Route::get('/login', function () { return view('users.login');});
+// Route::post('/login', [UserController::class, 'Login']);
 
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/', [PageController::class, 'getIndexAdmin']);

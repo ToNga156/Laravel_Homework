@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\Slides;
@@ -9,7 +10,7 @@ use App\Models\Comment;
 use App\Models\BillDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class PageController extends Controller
@@ -127,45 +128,27 @@ class PageController extends Controller
     }
 
 
-    // Hiển thị trang đăng ký
-    public function showRegisterForm()
-    {
-        return view('page.register');
+    public function getLogin(){
+        return view('users.login');
+    }
+    public function getSignup(){
+        return view('users.register');
+    }
+    public function postLogin(StoreUserRequest $request){
+        $email = $request->email;
+        $password  = $request->password;
+        if(Auth::attempt(['email' => $email, 'password' => $password])){
+            return redirect()->to(session()->get('url.intended', url('/page/trangchu')));
+        }
     }
 
-    // // Xử lý đăng ký
-    // public function register(Request $request) {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|email|unique:users',
-    //         'password' => 'required|min:6'
-    //     ]);
-
-    //     $user = new Users();
-    //     $user->name = $request->input('name');
-    //     $user->email = $request->input('email');
-    //     $user->password = Hash::make($request->input('password'));
-    //     $user->save();
-
-    //     return redirect('/signin')->with('success', 'Đăng ký thành công, hãy đăng nhập!');
-    // }
-
-    // // Hiển thị trang đăng nhập
-    // public function showLoginForm()
-    // {
-    //     return view('page.login');
-    // }
-
-    // // Xử lý đăng nhập
-    // public function login(Request $request)
-    // {
-    //     $credentials = $request->only('name', 'password');
-
-    //     if (Auth::attempt($credentials)) {
-    //         return redirect()->route('page.trangchu');
-    //     }
-
-    //     return back()->withErrors(['error' => 'Sai thông tin đăng nhập!']);
-    // }
+    public function postSignup(StoreUserRequest $request){
+        $user = new User();
+        $user->name = $request->fullname;
+        $user->email = $request->email;
+        $user->password =  bcrypt($request->password);
+        $user->save();
+        return redirect()->route('login');
+    }
 
 }
